@@ -89,6 +89,58 @@ const menuGroups = [
           // { label: "Delete Product", route: "/products/delete-product" },
         ],
       },
+      // {
+      //   icon: <Package size={18} />,
+      //   label: "Product Variations",
+      //   route: "#",
+      //   children: [
+      //     { label: "View Variations", route: "/products/variation" },
+      //     { label: "Create Variation", route: "/products/create-variation" },
+      //     { label: "Edit Variation", route: "/products/edit-variation" },
+      //     { label: "Delete Variation", route: "/products/delete-variation" },
+      //   ]
+      // },
+    ],
+  },
+  {
+    name: "RETAILERS",
+    menuItems: [
+      {
+        icon: <Package size={18} />,
+        label: "Manage",
+        route: "#",
+        children: [
+          { label: "View Retailers", route: "/retailers/manage/viewRetailers" },
+          { label: "Create Retailer", route: "/retailers/manage/createRetailers" },
+          // { label: "Edit Category", route: "/products/edit-category" },
+          // { label: "Delete Category", route: "/products/delete-category" },
+          // { label: "Filter by Active & Inactive", route: "/products/filter" },
+          // { label: "Search by Category Name", route: "/products/search" },
+        ],
+      },
+      {
+        icon: <Package size={18} />,
+        label: "Brand Management",
+        route: "#",
+        children: [
+          { label: "View Brand", route: "/products/brandManagement/viewBrand" },
+          { label: "Create Brand", route: "/products/brandManagement/createBrand" },
+          // { label: "Edit Brand", route: "/products/edit-brand" },
+          // { label: "Delete Brand", route: "/products/delete-brand" },
+          // { label: "View Brand Products", route: "/products/brand-products" },
+        ],
+      },
+      {
+        icon: <Package size={18} />,
+        label: "Product Management",
+        route: "#",
+        children: [
+          { label: "View Products", route: "/products/productManagement/viewProduct" },
+          { label: "Create Product", route: "/products/productManagement/createProduct" },
+          // { label: "Edit Product", route: "/products/edit-product" },
+          // { label: "Delete Product", route: "/products/delete-product" },
+        ],
+      },
       {
         icon: <Package size={18} />,
         label: "Product Variations",
