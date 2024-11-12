@@ -1,6 +1,4 @@
 import React from 'react';
-import { FiX, FiEdit } from 'react-icons/fi';
-
 
 const RetailerProfileModal = ({ retailer, onClose }) => {
   if (!retailer) return null;
@@ -9,72 +7,65 @@ const RetailerProfileModal = ({ retailer, onClose }) => {
     ? URL.createObjectURL(retailer.profilePicture)
     : '/default-profile.png';
 
+  const DetailRow = ({ label, value }) => (
+    <div className="p-4 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0">
+      <div className="flex justify-between items-center">
+        <span className="text-gray-500">{label}</span>
+        <span className="text-gray-900 font-medium">{value}</span>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="fixed inset-0 bg-gray-500 bg-opacity-60 flex justify-center mt-10 items-center z-50">
-      <div className="bg-white p-8 rounded-lg w-11/12 max-w-3xl relative shadow-lg">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-xl text-gray-600 hover:text-red-500"
-        >
-          <FiX />
-        </button>
-        <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Retailer Profile</h2>
-
-        {/* Profile Image */}
-        <div className="flex justify-center mb-6">
-          <div className="relative w-40 h-40">
-            <img
-              src={profileImageUrl}
-              alt="Profile"
-              className="w-full h-full rounded-full object-cover border-4 border-gray-200"
-            />
-            <label htmlFor="profilePicture" className="absolute bottom-0 right-0 bg-gray-200 p-2 rounded-full cursor-pointer">
-              <FiEdit className="text-xl text-gray-600" />
-              <input
-                type="file"
-                id="profilePicture"
-                style={{ display: 'none' }}
-              />
-            </label>
-          </div>
-        </div>
-
-        {/* Retailer Details */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <div className="font-semibold text-gray-600 mb-2">Name:</div>
-            <div className="text-lg text-gray-800">{retailer.name}</div>
-          </div>
-          <div>
-            <div className="font-semibold text-gray-600 mb-2">Email:</div>
-            <div className="text-lg text-gray-800">{retailer.email}</div>
-          </div>
-          <div>
-            <div className="font-semibold text-gray-600 mb-2">Phone:</div>
-            <div className="text-lg text-gray-800">{retailer.phone}</div>
-          </div>
-          <div>
-            <div className="font-semibold text-gray-600 mb-2">Address:</div>
-            <div className="text-lg text-gray-800">{retailer.address}</div>
-          </div>
-          <div>
-            <div className="font-semibold text-gray-600 mb-2">Company Name:</div>
-            <div className="text-lg text-gray-800">{retailer.companyName}</div>
-          </div>
-          <div>
-            <div className="font-semibold text-gray-600 mb-2">Store Number:</div>
-            <div className="text-lg text-gray-800">{retailer.storeNumber}</div>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex justify-center gap-6">
-          <button
+    <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-white w-full max-w-lg rounded-lg shadow-lg">
+        {/* Header */}
+        <div className="px-6 pt-6 pb-4 border-b border-gray-100 flex justify-between items-center">
+          <h2 className="text-xl font-semibold text-gray-900">Retailer Profile</h2>
+          <button 
             onClick={onClose}
-            className="bg-red-500 text-white py-2 px-6 rounded-lg hover:bg-red-600 transition duration-300"
+            className="text-gray-400 hover:text-gray-600 p-2"
           >
-            Close
+            <span className="text-2xl">×</span>
           </button>
+        </div>
+
+        {/* Profile Section */}
+        <div className="px-6 py-8 flex items-center gap-6 bg-gray-50">
+          <img
+            src={profileImageUrl}
+            alt={retailer.name}
+            className="w-20 h-20 rounded-full object-cover border-2 border-white shadow-sm"
+          />
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">{retailer.name}</h3>
+            <p className="text-gray-500">{retailer.companyName}</p>
+          </div>
+        </div>
+
+        {/* Details Section */}
+        <div className="px-6 divide-y divide-gray-100">
+          <DetailRow label="Email" value={retailer.email} />
+          <DetailRow label="Phone" value={retailer.phone} />
+          <DetailRow label="Address" value={retailer.address} />
+          <DetailRow label="Store Number" value={retailer.storeNumber} />
+        </div>
+
+        {/* Footer */}
+        <div className="px-6 py-4 bg-gray-50 rounded-b-lg border-t border-gray-100">
+          <div className="flex justify-end gap-3">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded"
+            >
+              Close
+            </button>
+            <button
+              className="px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-800 transition-colors"
+            >
+              Edit Profile
+            </button>
+          </div>
         </div>
       </div>
     </div>

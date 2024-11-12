@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';  // Import toastify
-import 'react-toastify/dist/ReactToastify.css';  // Import toastify styles
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
 const CreateProduct = () => {
@@ -13,7 +13,7 @@ const CreateProduct = () => {
 
   const handleSubmit = () => {
     const newProduct = {
-      id: new Date().getTime(),  // Create a unique ID based on timestamp
+      id: new Date().getTime(),
       name: productName,
       description,
       price,
@@ -21,12 +21,10 @@ const CreateProduct = () => {
       imageURL,
     };
 
-    // Save to localStorage
     const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
     storedProducts.push(newProduct);
     localStorage.setItem('products', JSON.stringify(storedProducts));
 
-    // Show success notification using Toastify
     toast.success("Product created successfully!", {
       position: "top-right",
       autoClose: 5000,
@@ -37,7 +35,6 @@ const CreateProduct = () => {
       progress: undefined,
     });
 
-    // Clear the form after submission
     setProductName('');
     setDescription('');
     setPrice('');
@@ -47,71 +44,82 @@ const CreateProduct = () => {
 
   return (
     <DefaultLayout>
-      <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4">Create Product</h1>
-        <div className="mb-4">
-          <label htmlFor="productName" className="block text-sm font-medium text-gray-700">Product Name</label>
-          <input
-            type="text"
-            id="productName"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-          />
-        </div>
+      <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+        <h1 className="text-3xl font-bold mb-8 text-gray-800">Create Product</h1>
+        
+        <div className="space-y-6">
+          <div>
+            <label htmlFor="productName" className="block text-sm font-medium text-gray-700 mb-2">
+              Product Name
+            </label>
+            <input
+              type="text"
+              id="productName"
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-          />
-        </div>
+          <div>
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+              Description
+            </label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all min-h-[120px]"
+            />
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price</label>
-          <input
-            type="number"
-            id="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-          />
-        </div>
+          <div>
+            <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
+              Price
+            </label>
+            <input
+              type="number"
+              id="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="brand" className="block text-sm font-medium text-gray-700">Brand</label>
-          <input
-            type="text"
-            id="brand"
-            value={brand}
-            onChange={(e) => setBrand(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-          />
-        </div>
+          <div>
+            <label htmlFor="brand" className="block text-sm font-medium text-gray-700 mb-2">
+              Brand
+            </label>
+            <input
+              type="text"
+              id="brand"
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="imageURL" className="block text-sm font-medium text-gray-700">Image URL</label>
-          <input
-            type="url"
-            id="imageURL"
-            value={imageURL}
-            onChange={(e) => setImageURL(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-          />
-        </div>
+          <div>
+            <label htmlFor="imageURL" className="block text-sm font-medium text-gray-700 mb-2">
+              Image URL
+            </label>
+            <input
+              type="url"
+              id="imageURL"
+              value={imageURL}
+              onChange={(e) => setImageURL(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
 
-        <button
-          onClick={handleSubmit}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Create Product
-        </button>
+          <button
+            onClick={handleSubmit}
+            className="w-full mt-8 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 transition-all font-medium"
+          >
+            Create Product
+          </button>
+        </div>
       </div>
-
-      {/* Add Toast container */}
       <ToastContainer />
     </DefaultLayout>
   );

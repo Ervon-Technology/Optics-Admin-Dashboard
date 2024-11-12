@@ -73,9 +73,6 @@ const menuGroups = [
         children: [
           { label: "View Brand", route: "/products/brandManagement/viewBrand" },
           { label: "Create Brand", route: "/products/brandManagement/createBrand" },
-          // { label: "Edit Brand", route: "/products/edit-brand" },
-          // { label: "Delete Brand", route: "/products/delete-brand" },
-          // { label: "View Brand Products", route: "/products/brand-products" },
         ],
       },
       {
@@ -85,21 +82,8 @@ const menuGroups = [
         children: [
           { label: "View Products", route: "/products/productManagement/viewProduct" },
           { label: "Create Product", route: "/products/productManagement/createProduct" },
-          // { label: "Edit Product", route: "/products/edit-product" },
-          // { label: "Delete Product", route: "/products/delete-product" },
         ],
       },
-      // {
-      //   icon: <Package size={18} />,
-      //   label: "Product Variations",
-      //   route: "#",
-      //   children: [
-      //     { label: "View Variations", route: "/products/variation" },
-      //     { label: "Create Variation", route: "/products/create-variation" },
-      //     { label: "Edit Variation", route: "/products/edit-variation" },
-      //     { label: "Delete Variation", route: "/products/delete-variation" },
-      //   ]
-      // },
     ],
   },
   {
@@ -107,27 +91,22 @@ const menuGroups = [
     menuItems: [
       {
         icon: <Package size={18} />,
-        label: "Manage",
+        label: "Management",
         route: "#",
         children: [
           { label: "View Retailers", route: "/retailers/manage/viewRetailers" },
           { label: "Create Retailer", route: "/retailers/manage/createRetailers" },
-          // { label: "Edit Category", route: "/products/edit-category" },
-          // { label: "Delete Category", route: "/products/delete-category" },
-          // { label: "Filter by Active & Inactive", route: "/products/filter" },
-          // { label: "Search by Category Name", route: "/products/search" },
+          { label: "Orders", route: "/retailers/manage/orders" },
         ],
       },
       {
         icon: <Package size={18} />,
-        label: "Brand Management",
+        label: "Performance",
         route: "#",
         children: [
-          { label: "View Brand", route: "/products/brandManagement/viewBrand" },
-          { label: "Create Brand", route: "/products/brandManagement/createBrand" },
-          // { label: "Edit Brand", route: "/products/edit-brand" },
-          // { label: "Delete Brand", route: "/products/delete-brand" },
-          // { label: "View Brand Products", route: "/products/brand-products" },
+          { label: "View Performance", route: "/retailers/performance/viewPerformance" },
+          { label: "Ratings/Feedbacks", route: "/retailers/performance/retailerRatings" },
+          { label: "Order Statistics", route: "/retailers/performance/orderStatistics" },
         ],
       },
       {
@@ -137,20 +116,7 @@ const menuGroups = [
         children: [
           { label: "View Products", route: "/products/productManagement/viewProduct" },
           { label: "Create Product", route: "/products/productManagement/createProduct" },
-          // { label: "Edit Product", route: "/products/edit-product" },
-          // { label: "Delete Product", route: "/products/delete-product" },
         ],
-      },
-      {
-        icon: <Package size={18} />,
-        label: "Product Variations",
-        route: "#",
-        children: [
-          { label: "View Variations", route: "/products/variation" },
-          { label: "Create Variation", route: "/products/create-variation" },
-          { label: "Edit Variation", route: "/products/edit-variation" },
-          { label: "Delete Variation", route: "/products/delete-variation" },
-        ]
       },
     ],
   },
