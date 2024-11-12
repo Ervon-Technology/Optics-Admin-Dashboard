@@ -111,11 +111,11 @@ const menuGroups = [
       },
       {
         icon: <Package size={18} />,
-        label: "Product Management",
+        label: "Shipment/Tracking",
         route: "#",
         children: [
-          { label: "View Products", route: "/products/productManagement/viewProduct" },
-          { label: "Create Product", route: "/products/productManagement/createProduct" },
+          { label: "View Shipments", route: "/retailers//viewProduct" },
+          { label: "Delivery Tracking", route: "/retailers//createProduct" },
         ],
       },
     ],
