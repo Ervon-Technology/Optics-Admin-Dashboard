@@ -51,6 +51,21 @@ const menuGroups = [
     ],
   },
   {
+    name: "USER",
+    menuItems: [
+      {
+        icon: <Package size={18} />,
+        label: "User Management",
+        route: "#",
+        children: [
+          { label: "User Role", route: "/user/userRole" },
+          { label: "Role Permission", route: "/user/rolePermission" },
+          { label: "Team", route: "/user/team" },
+        ],
+      },
+    ],
+  },
+  {
     name: "PRODUCTS",
     menuItems: [
       {
@@ -84,6 +99,14 @@ const menuGroups = [
           { label: "Create Product", route: "/products/productManagement/createProduct" },
         ],
       },
+      {
+        icon: <Package size={18} />,
+        label: "Inventory",
+        route: "#",
+        children: [
+          { label: "View Inventory", route: "/products/viewInventory" },
+        ],
+      },
     ],
   },
   {
@@ -114,8 +137,17 @@ const menuGroups = [
         label: "Shipment/Tracking",
         route: "#",
         children: [
-          { label: "View Shipments", route: "/retailers//viewProduct" },
-          { label: "Delivery Tracking", route: "/retailers//createProduct" },
+          { label: "View Shipments", route: "/retailers/shipmentsTracking/viewShipments" },
+          { label: "Delivery Tracking", route: "/retailers/shipmentsTracking/deliveryTracking" },
+        ],
+      },
+      {
+        icon: <Package size={18} />,
+        label: "Communiciation",
+        route: "#",
+        children: [
+          { label: "Retailers Communication", route: "/retailers/communication/retailersCommunication" },
+          { label: "Retailers Notification", route: "/retailers/communication/retailersNotification" },
         ],
       },
     ],
