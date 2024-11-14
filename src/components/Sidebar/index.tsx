@@ -30,20 +30,6 @@ const menuGroups = [
         route: "/profile",
       },
       {
-        icon: <LetterText size={18} />,
-        label: "Forms",
-        route: "#",
-        children: [
-          { label: "Form Elements", route: "/forms/form-elements" },
-          { label: "Form Layout", route: "/forms/form-layout" },
-        ],
-      },
-      {
-        icon: <Sheet size={18} />,
-        label: "Tables",
-        route: "/tables",
-      },
-      {
         icon: <Settings size={18} />,
         label: "Settings",
         route: "/settings",
@@ -75,10 +61,6 @@ const menuGroups = [
         children: [
           { label: "View Categories", route: "/products/categories/viewCategories" },
           { label: "Create Category", route: "/products/categories/createCategories" },
-          // { label: "Edit Category", route: "/products/edit-category" },
-          // { label: "Delete Category", route: "/products/delete-category" },
-          // { label: "Filter by Active & Inactive", route: "/products/filter" },
-          // { label: "Search by Category Name", route: "/products/search" },
         ],
       },
       {
@@ -157,10 +139,9 @@ const menuGroups = [
     menuItems: [
       {
         icon: <ChartPie size={18} />,
-        label: "Chart",
-        route: "/chart",
-      },
-      
+        label: "Transactions",
+        route: "/transactions",
+      },  
       {
         icon: < LogIn />,
         label: "Authentication",
