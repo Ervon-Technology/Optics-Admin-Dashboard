@@ -10,6 +10,13 @@ const CreateProduct = () => {
   const [price, setPrice] = useState('');
   const [brand, setBrand] = useState('');
   const [imageURL, setImageURL] = useState('');
+  const [frameType, setFrameType] = useState('');
+  const [material, setMaterial] = useState('');
+  const [color, setColor] = useState('');
+  const [size, setSize] = useState('');
+  const [gender, setGender] = useState('');
+  const [frameWidth, setFrameWidth] = useState('');
+  const [style, setStyle] = useState('');
 
   const handleSubmit = () => {
     const newProduct = {
@@ -19,6 +26,13 @@ const CreateProduct = () => {
       price,
       brand,
       imageURL,
+      frameType,
+      material,
+      color,
+      size,
+      gender,
+      frameWidth,
+      style,
     };
 
     const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
@@ -40,6 +54,13 @@ const CreateProduct = () => {
     setPrice('');
     setBrand('');
     setImageURL('');
+    setFrameType('');
+    setMaterial('');
+    setColor('');
+    setSize('');
+    setGender('');
+    setFrameWidth('');
+    setStyle('');
   };
 
   return (
@@ -108,6 +129,104 @@ const CreateProduct = () => {
               id="imageURL"
               value={imageURL}
               onChange={(e) => setImageURL(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
+
+          {/* Frame Type */}
+          <div>
+            <label htmlFor="frameType" className="block text-sm font-medium text-gray-700 mb-2">
+              Frame Type
+            </label>
+            <input
+              type="text"
+              id="frameType"
+              value={frameType}
+              onChange={(e) => setFrameType(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
+
+          {/* Material */}
+          <div>
+            <label htmlFor="material" className="block text-sm font-medium text-gray-700 mb-2">
+              Material
+            </label>
+            <input
+              type="text"
+              id="material"
+              value={material}
+              onChange={(e) => setMaterial(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
+
+          {/* Color */}
+          <div>
+            <label htmlFor="color" className="block text-sm font-medium text-gray-700 mb-2">
+              Color
+            </label>
+            <input
+              type="text"
+              id="color"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
+
+          {/* Size */}
+          <div>
+            <label htmlFor="size" className="block text-sm font-medium text-gray-700 mb-2">
+              Size
+            </label>
+            <input
+              type="text"
+              id="size"
+              value={size}
+              onChange={(e) => setSize(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
+
+          {/* Gender */}
+          <div>
+            <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-2">
+              Gender
+            </label>
+            <input
+              type="text"
+              id="gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
+
+          {/* Frame Width */}
+          <div>
+            <label htmlFor="frameWidth" className="block text-sm font-medium text-gray-700 mb-2">
+              Frame Width
+            </label>
+            <input
+              type="text"
+              id="frameWidth"
+              value={frameWidth}
+              onChange={(e) => setFrameWidth(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
+
+          {/* Style */}
+          <div>
+            <label htmlFor="style" className="block text-sm font-medium text-gray-700 mb-2">
+              Style
+            </label>
+            <input
+              type="text"
+              id="style"
+              value={style}
+              onChange={(e) => setStyle(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
             />
           </div>

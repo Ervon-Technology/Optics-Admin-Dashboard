@@ -6,30 +6,30 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const CreateCategory = () => {
   const [categoryName, setCategoryName] = useState('');
-  const [status, setStatus] = useState('Active');
-  const [description, setDescription] = useState('');
+  const [categoryStatus, setCategoryStatus] = useState('Active');
+  const [categoryDescription, setCategoryDescription] = useState('');
   const [priceRange, setPriceRange] = useState('');
-  const [popularity, setPopularity] = useState('');
-  const [error, setError] = useState('');
+  const [categoryRating, setCategoryRating] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!categoryName.trim()) {
-      setError('Category name is required');
+      setErrorMessage('Category name is required');
       return;
     }
 
-    setError('');
+    setErrorMessage('');
 
     const newCategory = {
       id: Date.now(),
       name: categoryName,
-      status,
-      description,
+      status: categoryStatus,
+      description: categoryDescription,
       priceRange,
-      popularity,
+      rating: categoryRating,
     };
 
     // Save to localStorage
@@ -41,10 +41,10 @@ const CreateCategory = () => {
 
     // Reset form fields
     setCategoryName('');
-    setStatus('Active');
-    setDescription('');
+    setCategoryStatus('Active');
+    setCategoryDescription('');
     setPriceRange('');
-    setPopularity('');
+    setCategoryRating('');
   };
 
   const StatusBadge = ({ status }) => {
@@ -92,18 +92,18 @@ const CreateCategory = () => {
                 className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
                 placeholder="Enter category name"
               />
-              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+              {errorMessage && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>}
             </div>
 
-            {/* Status */}
+            {/* Category Status */}
             <div>
-              <label htmlFor="status" className="block text-gray-700 font-semibold mb-2">
+              <label htmlFor="categoryStatus" className="block text-gray-700 font-semibold mb-2">
                 Status
               </label>
               <select
-                id="status"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
+                id="categoryStatus"
+                value={categoryStatus}
+                onChange={(e) => setCategoryStatus(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
               >
                 <option value="Active">Active</option>
@@ -111,15 +111,15 @@ const CreateCategory = () => {
               </select>
             </div>
 
-            {/* Description */}
+            {/* Category Description */}
             <div>
-              <label htmlFor="description" className="block text-gray-700 font-semibold mb-2">
+              <label htmlFor="categoryDescription" className="block text-gray-700 font-semibold mb-2">
                 Description
               </label>
               <textarea
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                id="categoryDescription"
+                value={categoryDescription}
+                onChange={(e) => setCategoryDescription(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
                 placeholder="Enter description"
               />
@@ -130,33 +130,37 @@ const CreateCategory = () => {
               <label htmlFor="priceRange" className="block text-gray-700 font-semibold mb-2">
                 Price Range
               </label>
-              <input
-                type="text"
+              <select
                 id="priceRange"
                 value={priceRange}
                 onChange={(e) => setPriceRange(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
-                placeholder="Enter price range"
-              />
+              >
+                <option value="">Select a price range</option>
+                <option value="$0-$50">$0 - $50</option>
+                <option value="$51-$200">$51 - $200</option>
+                <option value="$201-$500">$201 - $500</option>
+                <option value="$501 and above">$501 and above</option>
+              </select>
             </div>
 
-            {/* Popularity */}
+            {/* Category Rating */}
             <div>
-              <label htmlFor="popularity" className="block text-gray-700 font-semibold mb-2">
-                Popularity
+              <label htmlFor="categoryRating" className="block text-gray-700 font-semibold mb-2">
+                Category Rating
               </label>
               <input
                 type="text"
-                id="popularity"
-                value={popularity}
-                onChange={(e) => setPopularity(e.target.value)}
+                id="categoryRating"
+                value={categoryRating}
+                onChange={(e) => setCategoryRating(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
-                placeholder="Enter popularity score"
+                placeholder="Enter category rating (e.g., 4.5/5)"
               />
             </div>
 
             {/* Submit Button */}
-            <div className="flex ">
+            <div className="flex">
               <button
                 type="submit"
                 className="inline-flex items-center px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

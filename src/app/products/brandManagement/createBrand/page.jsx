@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
-import DefaultLayout from '@/components/Layouts/DefaultLayout';
+import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';
 
 const CreateBrand = () => {
@@ -12,13 +12,18 @@ const CreateBrand = () => {
   const [country, setCountry] = useState('');
   const [yearEstablished, setYearEstablished] = useState('');
   const [websiteURL, setWebsiteURL] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = async (e) => {
+  // Handle form submission
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
+
+    if (!brandName.trim()) {
+      setErrorMessage('Brand name is required');
+      return;
+    }
+
+    setErrorMessage('');
 
     try {
       const storedBrands = JSON.parse(localStorage.getItem('brands')) || [];
@@ -34,13 +39,10 @@ const CreateBrand = () => {
       };
       localStorage.setItem('brands', JSON.stringify([...storedBrands, newBrand]));
       
-      console.log('Brand Created:', newBrand);
+      // Show success toast notification
+      toast.success('Brand created successfully!');
       
-      toast.success('Brand successfully created!', {
-        position: 'top-right',
-        autoClose: 3000,
-      });
-      
+      // Reset form fields
       setBrandName('');
       setStatus('Active');
       setLogo('');
@@ -49,172 +51,164 @@ const CreateBrand = () => {
       setYearEstablished('');
       setWebsiteURL('');
     } catch (err) {
-      setError('Failed to create brand');
-      toast.error('Error creating brand!', {
-        position: 'top-right',
-        autoClose: 3000,
-      });
-    } finally {
-      setLoading(false);
+      setErrorMessage('Failed to create brand');
+      toast.error('Error creating brand!');
     }
+  };
+
+  const StatusBadge = ({ status }) => {
+    const getStatusColor = (status) => {
+      switch (status.toLowerCase()) {
+        case 'active':
+          return 'bg-emerald-100 text-emerald-800';
+        case 'inactive':
+          return 'bg-gray-100 text-gray-800';
+        default:
+          return 'bg-blue-100 text-blue-800';
+      }
+    };
+
+    return (
+      <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(status)}`}>
+        {status}
+      </span>
+    );
   };
 
   return (
     <DefaultLayout>
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <div className="border-b pb-6 mb-6">
-            <h1 className="text-3xl font-bold text-gray-900">Create Brand</h1>
-            <p className="mt-2 text-gray-600">Fill in the details to create a new brand</p>
+      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="mb-8">
+          <div className="flex flex-col sm:flex-row justify-between gap-4">
+            <h1 className="text-2xl font-bold text-gray-900">Create New Brand</h1>
           </div>
+        </div>
 
-          {error && (
-            <div className="bg-red-50 text-red-500 p-4 rounded-lg mb-6 flex items-center">
-              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-              </svg>
-              {error}
-            </div>
-          )}
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Brand Name */}
-              <div className="space-y-2">
-                <label htmlFor="brandName" className="block text-sm font-medium text-gray-700">
-                  Brand Name
-                </label>
-                <input
-                  type="text"
-                  id="brandName"
-                  value={brandName}
-                  onChange={(e) => setBrandName(e.target.value)}
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-                  placeholder="Enter brand name"
-                />
-              </div>
-
-              {/* Status */}
-              <div className="space-y-2">
-                <label htmlFor="status" className="block text-sm font-medium text-gray-700">
-                  Status
-                </label>
-                <select
-                  id="status"
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-                >
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                </select>
-              </div>
-
-              {/* Logo URL */}
-              <div className="space-y-2">
-                <label htmlFor="logo" className="block text-sm font-medium text-gray-700">
-                  Brand Logo (Image URL)
-                </label>
-                <input
-                  type="text"
-                  id="logo"
-                  value={logo}
-                  onChange={(e) => setLogo(e.target.value)}
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-                  placeholder="Enter logo image URL"
-                />
-              </div>
-
-              {/* Country */}
-              <div className="space-y-2">
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                  Country
-                </label>
-                <input
-                  type="text"
-                  id="country"
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-                  placeholder="Enter the country where the brand is based"
-                />
-              </div>
-
-              {/* Year Established */}
-              <div className="space-y-2">
-                <label htmlFor="yearEstablished" className="block text-sm font-medium text-gray-700">
-                  Year Established
-                </label>
-                <input
-                  type="number"
-                  id="yearEstablished"
-                  value={yearEstablished}
-                  onChange={(e) => setYearEstablished(e.target.value)}
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-                  placeholder="Enter the year the brand was established"
-                />
-              </div>
-
-              {/* Website URL */}
-              <div className="space-y-2">
-                <label htmlFor="websiteURL" className="block text-sm font-medium text-gray-700">
-                  Website URL
-                </label>
-                <input
-                  type="url"
-                  id="websiteURL"
-                  value={websiteURL}
-                  onChange={(e) => setWebsiteURL(e.target.value)}
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-                  placeholder="Enter brand's official website URL"
-                />
-              </div>
+        {/* Form Section */}
+        <div className="bg-white rounded-lg shadow">
+          <form onSubmit={handleSubmit} className="space-y-6 px-6 py-6">
+            {/* Brand Name */}
+            <div>
+              <label htmlFor="brandName" className="block text-gray-700 font-semibold mb-2">
+                Brand Name
+              </label>
+              <input
+                type="text"
+                id="brandName"
+                value={brandName}
+                onChange={(e) => setBrandName(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+                placeholder="Enter brand name"
+              />
+              {errorMessage && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>}
             </div>
 
-            {/* Description - Full Width */}
-            <div className="space-y-2">
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            {/* Status */}
+            <div>
+              <label htmlFor="status" className="block text-gray-700 font-semibold mb-2">
+                Status
+              </label>
+              <select
+                id="status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+              >
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+
+            {/* Logo URL */}
+            <div>
+              <label htmlFor="logo" className="block text-gray-700 font-semibold mb-2">
+                Brand Logo (Image URL)
+              </label>
+              <input
+                type="text"
+                id="logo"
+                value={logo}
+                onChange={(e) => setLogo(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+                placeholder="Enter logo image URL"
+              />
+            </div>
+
+            {/* Description */}
+            <div>
+              <label htmlFor="description" className="block text-gray-700 font-semibold mb-2">
                 Description
               </label>
               <textarea
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                required
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow h-32 resize-none"
-                placeholder="Enter a short description of the brand"
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+                placeholder="Enter description"
+              />
+            </div>
+
+            {/* Country */}
+            <div>
+              <label htmlFor="country" className="block text-gray-700 font-semibold mb-2">
+                Country
+              </label>
+              <input
+                type="text"
+                id="country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+                placeholder="Enter the country where the brand is based"
+              />
+            </div>
+
+            {/* Year Established */}
+            <div>
+              <label htmlFor="yearEstablished" className="block text-gray-700 font-semibold mb-2">
+                Year Established
+              </label>
+              <input
+                type="number"
+                id="yearEstablished"
+                value={yearEstablished}
+                onChange={(e) => setYearEstablished(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+                placeholder="Enter the year the brand was established"
+              />
+            </div>
+
+            {/* Website URL */}
+            <div>
+              <label htmlFor="websiteURL" className="block text-gray-700 font-semibold mb-2">
+                Website URL
+              </label>
+              <input
+                type="url"
+                id="websiteURL"
+                value={websiteURL}
+                onChange={(e) => setWebsiteURL(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+                placeholder="Enter brand's official website URL"
               />
             </div>
 
             {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? (
-                <span className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Saving...
-                </span>
-              ) : (
-                'Create Brand'
-              )}
-            </button>
+            <div className="flex">
+              <button
+                type="submit"
+                className="inline-flex items-center px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Create Brand
+              </button>
+            </div>
           </form>
         </div>
-
-        <ToastContainer />
       </div>
+
+      {/* Toast container */}
+      <ToastContainer />
     </DefaultLayout>
   );
 };

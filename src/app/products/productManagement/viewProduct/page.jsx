@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import EditProductModal from '../../../../components/Modals/EditProductModal';
@@ -39,7 +39,7 @@ const ViewProducts = () => {
           {/* Header Section */}
           <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <h1 className="text-3xl font-bold text-gray-900">Products</h1>
+              <h1 className="text-3xl font-bold text-gray-900">Manage Products</h1>
               <div className="relative w-full md:w-96">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
@@ -62,7 +62,7 @@ const ViewProducts = () => {
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="p-6">
                   {/* Image Placeholder */}
@@ -89,13 +89,44 @@ const ViewProducts = () => {
                     <p className="text-lg font-bold text-blue-600">${product.price}</p>
                   </div>
 
-                  {/* Product Description */}
-                  <p className="text-sm text-gray-500 mb-4 line-clamp-2">
-                    {product.description || 'No description available'}
-                  </p>
+                  {/* Product Details */}
+                  <div className="space-y-2 text-sm text-gray-600">
+                    <div className="flex justify-between">
+                      <span className="font-medium">Description:</span>
+                      <span>{product.description || 'No description available'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Frame Type:</span>
+                      <span>{product.frameType}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Material:</span>
+                      <span>{product.material}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Color:</span>
+                      <span>{product.color}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Size:</span>
+                      <span>{product.size}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Gender:</span>
+                      <span>{product.gender}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Frame Width:</span>
+                      <span>{product.frameWidth}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Style:</span>
+                      <span>{product.style}</span>
+                    </div>
+                  </div>
 
                   {/* Actions */}
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 mt-4">
                     <button
                       onClick={() => handleEdit(product)}
                       className="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium py-2 px-4 rounded-lg transition-colors duration-200"
